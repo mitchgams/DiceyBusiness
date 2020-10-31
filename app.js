@@ -12,16 +12,14 @@ $('document').ready(() => {
     });
     $('#sumDie').click(() => {
         let sum = 0;
-        for(die of dice) {
-            sum += die.value;
-        }
-        alert(sum);
+        for(die of dice) sum += die.value;
+        $('#dice-sum').empty().append(`Dice Sum: ${sum}`);
     })
 });
 class Die {
     constructor() {
         this.value = this.roll();
-        console.log(this);
+        //console.log(this);
     }
 
     roll() {
@@ -57,8 +55,8 @@ class Die {
         this.dieFlex.append(unicode[result-1]);
         this.dieFlex.attr('id', result);
         this.value = result;
-        console.log(this);
-        console.log(dice);
+        //console.log(this);
+        //console.log(dice);
     }
     
 }
