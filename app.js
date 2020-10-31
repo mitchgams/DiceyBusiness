@@ -39,6 +39,12 @@ class Die {
     delete() {
         //dice.splice(this.count, 1);
         //dice[this.count] = 0;
+        /******************************************************
+         * I tried removing the object from the array but the way
+         * that I wrote this, the index position in the array
+         * is important. So I decided to leave it in there and
+         * just make it be ignored when the value is set to 0.
+         ******************************************************/
         this.value = 0;
         this.dieFlex.remove();
     }
