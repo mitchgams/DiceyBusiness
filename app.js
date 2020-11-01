@@ -16,7 +16,7 @@ class Die {
     constructor() {
         this.value = this.roll();
     }
-
+    
     roll() {
         let possibility = Math.floor(Math.random() * 6) + 1;
         this.newItem = $(`<div>${unicode[possibility-1]}</div>`);
