@@ -1,10 +1,16 @@
 .row1 {
     width: 70vw;
     margin: auto;
+    padding: 5px;
 }
 
 .row2 { 
     width: 100%;
+}
+
+h6 {
+    font-size: 19px;
+    color: rgb(247, 151, 151);
 }
 
 .font1 {
