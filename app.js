@@ -11,9 +11,9 @@ $('document').ready(() => {
         }
     });
     $('#sumDie').click(() => {
-        let sum = 0;
-        for(die of dice) sum += die.value;
-        $('#dice-sum').empty().append(`Dice Sum: ${sum}`);
+            let sum = 0;
+            for(die of dice) sum += die.value;
+            $('#dice-sum').empty().append(`Dice Sum: ${sum}`);
     })
 });
 class Die {
@@ -23,20 +23,18 @@ class Die {
     }
 
     roll() {
-        let possibilities = [1, 2, 3, 4, 5, 6];
-        let result = possibilities[Math.floor(Math.random() * 6)];
-        $('.flex-dice').append(`<div class='${dieCount}' id='${result}'>${unicode[result-1]}</div>`);
+        let possibility = Math.floor(Math.random() * 6) + 1;
+        $('.flex-dice').append(`<div class='${dieCount}' id='${possibility}'>${unicode[possibility-1]}</div>`);
         this.count = dieCount;
         dieCount++;
         this.dieFlex = $(`.${this.count}`);
         this.dieFlex.click(() => this.reroll());
         this.dieFlex.dblclick(() => this.delete());
-        return result;
+        return possibility;
     }
 
     delete() {
         //dice.splice(this.count, 1);
-        //dice[this.count] = 0;
         /******************************************************
          * I tried removing the object from the array but the way
          * that I wrote this, the index position in the array
@@ -49,14 +47,11 @@ class Die {
 
     reroll() {
         if(this.value === 0) return; // deleted die
-        let possibilities = [1, 2, 3, 4, 5, 6];
-        let result = possibilities[Math.floor(Math.random() * 6)];
+        let possibility = Math.floor(Math.random() * 6) + 1;
         this.dieFlex.empty();
-        this.dieFlex.append(unicode[result-1]);
-        this.dieFlex.attr('id', result);
-        this.value = result;
-        //console.log(this);
-        //console.log(dice);
+        this.dieFlex.append(unicode[possibility-1]);
+        this.dieFlex.attr('id', possibility);
+        this.value = possibility;
     }
     
 }
