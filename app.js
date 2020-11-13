@@ -1,6 +1,5 @@
 let dice = [];
 let unicode = ['\u2680', '\u2681', '\u2682', '\u2683', '\u2684', '\u2685'];
-let dieCount = 0;
 $('document').ready(() => {
     $('#newDie').click(() => dice.push(new Die()));
     $('#rerollDie').click(() => {
