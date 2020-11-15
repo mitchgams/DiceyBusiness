@@ -1,3 +1,8 @@
+/**************************
+ * I went ahead and went with unicode instead of numbers. I also
+ * added some flavor to the dice being rolled
+ */
+
 let dice = [];
 let unicode = ['\u2680', '\u2681', '\u2682', '\u2683', '\u2684', '\u2685'];
 $('document').ready(() => {
@@ -22,7 +27,7 @@ class Die {
     }
 
     roll() {
-        let endValue = this.dieValue();
+        this.value = this.dieValue();
         if(this.newItem === undefined) {
             this.newItem = $('<div></div>');
             this.dieBoard.append(this.newItem);
@@ -32,11 +37,10 @@ class Die {
         }, 275);
         setTimeout(() => {
             clearInterval(rollDie);
-            this.newItem.empty().append(unicode[endValue-1]);
+            this.newItem.empty().append(unicode[this.value-1]);
             this.newItem.click(() => this.roll());
             this.newItem.dblclick(() => this.delete());
-        }, 1650);
-        this.value = endValue;
+        }, 1650)
     }
 
     delete() {
