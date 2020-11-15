@@ -3,7 +3,7 @@ let unicode = ['\u2680', '\u2681', '\u2682', '\u2683', '\u2684', '\u2685'];
 $('document').ready(() => {
     $('#newDie').click(() => dice.push(new Die()));
     $('#rerollDie').click(() => {
-        for(die of dice) die.reroll();
+        for(die of dice) die.roll();
     });
     $('#sumDie').click(() => {
             let sum = 0;
@@ -13,26 +13,34 @@ $('document').ready(() => {
 });
 class Die {
     constructor() {
-        this.value = this.roll();
+        this.dieBoard = $('.flex-dice');
+        this.roll();
     }
-    
+
+    dieValue() {
+        return Math.floor(Math.random() * 6) + 1;
+    }
+
     roll() {
-        let possibility = Math.floor(Math.random() * 6) + 1;
-        this.newItem = $(`<div>${unicode[possibility-1]}</div>`);
-        $('.flex-dice').append(this.newItem);
-        this.newItem.click(() => this.reroll());
-        this.newItem.dblclick(() => this.delete());
-        return possibility;
+        let endValue = this.dieValue();
+        if(this.newItem === undefined) {
+            this.newItem = $('<div></div>');
+            this.dieBoard.append(this.newItem);
+        }
+        let rollDie = setInterval(() => {
+            this.newItem.empty().append(unicode[this.dieValue()-1]);
+        }, 275);
+        setTimeout(() => {
+            clearInterval(rollDie);
+            this.newItem.empty().append(unicode[endValue-1]);
+            this.newItem.click(() => this.roll());
+            this.newItem.dblclick(() => this.delete());
+        }, 1650);
+        this.value = endValue;
     }
 
     delete() {
-        dice.splice(dice.indexOf(this), 1);
+        if(dice.indexOf(this) > -1) dice.splice(dice.indexOf(this), 1);
         this.newItem.remove();
     }
-
-    reroll() {
-        this.value = Math.floor(Math.random() * 6) + 1;
-        this.newItem.empty().append(unicode[this.value-1]);
-    }
-    
 }
